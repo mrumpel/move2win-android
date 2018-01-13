@@ -59,4 +59,11 @@ public class CreateRoomVM {
                 }
         );
     }
+
+    public boolean isValid() {
+        return start.get()!=null &&
+                finish.get()!=null &&
+                !roomName.get().trim().isEmpty() &&
+                !driverName.get().trim().isEmpty();
+    }
 }
