@@ -8,6 +8,15 @@ import com.google.firebase.database.PropertyName;
 
 public class Room {
 
+    public enum Status {
+        Empty, //только создатель комнаты, ожидающий соперника
+        Full, //создатель и соперник
+        Start, //гонка началась
+        End3, //гонка закончилась
+        Break, //гонка отменена
+        Processed //ставки обработаны
+    }
+
     @PropertyName("Driver1")
     public Driver driver1;
 
