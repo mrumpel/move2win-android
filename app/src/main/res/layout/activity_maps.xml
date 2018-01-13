@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:background="#9fa"
-        android:text="Ожидание опонента"
+        android:text="Проследуйте к старту"
         android:gravity="center_horizontal"
         android:padding="@dimen/indent_small"
         android:visibility="gone"

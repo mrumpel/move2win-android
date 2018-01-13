@@ -2,8 +2,12 @@ package com.elewise.nlsvm.move2win.activities;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +26,7 @@ import com.elewise.nlsvm.move2win.models.Room;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -59,9 +64,10 @@ public class GameActivity extends MapsActivity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        btnReadyToStart = findViewById(R.id.race_status);
+        statusLabel = findViewById(R.id.race_status);
+        statusLabel.setVisibility(View.VISIBLE);
 
-        statusLabel = findViewById(R.id.ready_to_start);
+        btnReadyToStart = findViewById(R.id.ready_to_start);
         btnReadyToStart.setVisibility(View.VISIBLE);
         btnReadyToStart.setEnabled(false);
 
@@ -123,16 +129,11 @@ public class GameActivity extends MapsActivity implements LocationListener {
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (LatLng latLng : latLngs) {
                     builder.include(latLng);
-                    double i = 0.007;
-                    builder.include(new LatLng(latLng.latitude- i, latLng.longitude));
-                    builder.include(new LatLng(latLng.latitude+ i, latLng.longitude));
-                    builder.include(new LatLng(latLng.latitude, latLng.longitude- i));
-                    builder.include(new LatLng(latLng.latitude, latLng.longitude+ i));
                 }
 
                 LatLngBounds bounds = builder.build();
 
-                int padding = 0; // offset from edges of the map in pixels
+                int padding = getResources().getDimensionPixelSize(R.dimen.indent_normal);
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
                 mMap.moveCamera(cu);
@@ -143,25 +144,24 @@ public class GameActivity extends MapsActivity implements LocationListener {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("stef", "onChildChanged: room updated");
 
                 int oldStatus = room.status;
 
                 room = dataSnapshot.getValue(Room.class);
 
                 if(owner && room.isDriversReady() && room.status == Room.Status.Empty.ordinal()){
-                    updateRoomStatus(1);
+                    updateRoomStatus(2);
                 }
 
                 updateMarkers(room.driver1, room.driver2);
 
-                if(oldStatus == 0 && room.status == 1){
+                if(oldStatus == 0 && room.status == 2){
                     statusLabel.setText("Гонка началась!!!");
                     statusLabel.setBackgroundColor(Color.RED);
                 }
 
-                if(oldStatus == 1 && room.status == Room.Status.End3.ordinal()){
-
+                if(oldStatus == 2 && room.status == Room.Status.End3.ordinal()){
+                    finish();
                 }
             }
 
@@ -181,6 +181,14 @@ public class GameActivity extends MapsActivity implements LocationListener {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(room.status != 3){
+            updateRoomStatus(4);
+        }
     }
 
     private void runGpsLocation() {
@@ -228,7 +236,7 @@ public class GameActivity extends MapsActivity implements LocationListener {
                 btnReadyToStart.setEnabled(results[0]<80 && results[1]<80);
             }
 
-            if(room.status == 1){
+            if(room.status == 2){
                 btnReadyToStart.setVisibility(View.GONE);
 
                 Location.distanceBetween(
@@ -241,6 +249,8 @@ public class GameActivity extends MapsActivity implements LocationListener {
 
                 if(results[0]<50 && results[1]<50){
                     updateRoomStatus(4);
+                    startActivity(new Intent(GameActivity.this, CreateRoomActivity.class));
+                    finish();
                 }
 
             }
@@ -251,7 +261,14 @@ public class GameActivity extends MapsActivity implements LocationListener {
 
         if(driver1!=null && driver1.curPos != null) {
             if (marker1 == null) {
+                int px = getResources().getDimensionPixelSize(R.dimen.indent_large);
+                Bitmap bitmap1 = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap1);
+                Drawable shape = getResources().getDrawable(R.drawable.marker_one);
+                shape.setBounds(0, 0, bitmap1.getWidth(), bitmap1.getHeight());
+                shape.draw(canvas);
                 MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap1));
                 markerOptions.position(getLatLng(driver1));
                 marker1 = mMap.addMarker(markerOptions);
             } else {
@@ -261,8 +278,15 @@ public class GameActivity extends MapsActivity implements LocationListener {
         
         if(driver2!=null && driver2.curPos !=null){
             if (marker2 == null) {
+                int px = getResources().getDimensionPixelSize(R.dimen.indent_large);
+                Bitmap bitmap1 = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap1);
+                Drawable shape = getResources().getDrawable(R.drawable.marker_two);
+                shape.setBounds(0, 0, bitmap1.getWidth(), bitmap1.getHeight());
+                shape.draw(canvas);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(getLatLng(driver2));
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap1));
                 marker2 = mMap.addMarker(markerOptions);
             } else {
                 marker2.setPosition(getLatLng(driver2));

@@ -1,5 +1,6 @@
 package com.elewise.nlsvm.move2win.models;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
 /**
@@ -35,9 +36,7 @@ public class Room {
     @PropertyName("Status")
     public int status;
 
-    @PropertyName("Timestamp")
-    public long timestamp;
-
+    @Exclude
     public boolean isDriversReady(){
         return driver1!=null && driver2!=null && driver2.ready && driver1.ready;
     }

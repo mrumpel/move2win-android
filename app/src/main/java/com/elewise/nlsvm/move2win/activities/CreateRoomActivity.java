@@ -49,6 +49,11 @@ public class CreateRoomActivity extends AppCompatActivity implements CreateRoomH
             Map<String, Object> map = new HashMap<>();
             map.put(room.name, room);
             FirebaseDatabase.getInstance().getReference().child("android").updateChildren(map);
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra("owner", true);
+            intent.putExtra("room_name", room.name);
+
+            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
