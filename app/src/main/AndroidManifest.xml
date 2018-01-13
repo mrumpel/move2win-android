@@ -43,6 +43,7 @@
         <activity android:name=".activities.RoomsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.CreateRoomActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.SelectPositionActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.GameActivity" android:screenOrientation="portrait"/>
 
     </application>
 

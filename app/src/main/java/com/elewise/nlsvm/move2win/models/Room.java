@@ -38,4 +38,7 @@ public class Room {
     @PropertyName("Timestamp")
     public long timestamp;
 
+    public boolean isDriversReady(){
+        return driver1!=null && driver2!=null && driver2.ready && driver1.ready;
+    }
 }

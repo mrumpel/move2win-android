@@ -38,8 +38,6 @@ public class CreateRoomActivity extends AppCompatActivity implements CreateRoomH
 
     @Override
     public void onClickCreateRoom(View view) {
-        Toast.makeText(this, "Create clicked", Toast.LENGTH_SHORT).show();
-
         if(model.isValid()){
             Room room = new Room();
             room.name = model.roomName.get();

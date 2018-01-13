@@ -1,7 +1,42 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.elewise.nlsvm.move2win.activities.MapsActivity" />
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    >
+
+    <TextView
+        android:id="@+id/race_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:background="#9fa"
+        android:text="Ожидание опонента"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/indent_small"
+        android:visibility="gone"
+        />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:context="com.elewise.nlsvm.move2win.activities.MapsActivity" />
+
+    <Button
+        android:id="@+id/ready_to_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/indent_small"
+        android:layout_marginTop="@dimen/indent_small"
+        android:layout_marginStart="@dimen/indent_normal"
+        android:layout_marginEnd="@dimen/indent_normal"
+        android:visibility="gone"
+        android:text="Готов"
+        android:textAllCaps="false"
+        />
+
+</LinearLayout>

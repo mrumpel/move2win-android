@@ -21,4 +21,7 @@ public class Driver {
     @PropertyName("Ready")
     public boolean ready;
 
+    @PropertyName("CurrentPosition")
+    public Position curPos;
+
 }

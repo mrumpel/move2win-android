@@ -11,13 +11,11 @@ import com.elewise.nlsvm.move2win.R;
 import com.elewise.nlsvm.move2win.adapters.RoomsAdapter;
 import com.elewise.nlsvm.move2win.models.Room;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class RoomsActivity extends AppCompatActivity {
+public class RoomsActivity extends AppCompatActivity implements RoomsAdapter.ItemClickListener {
 
-    private DatabaseReference instance;
     private RoomsAdapter adapter;
 
     @Override
@@ -48,7 +46,11 @@ public class RoomsActivity extends AppCompatActivity {
 
         adapter = new RoomsAdapter(options);
 
-        view.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnClickListener(this);
+
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+
+        view.setLayoutManager(layout);
 
         view.setAdapter(adapter);
 
@@ -66,5 +68,12 @@ public class RoomsActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         adapter.stopListening();
+    }
+
+    @Override
+    public void onItemClick(Room room) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("room_name", room.name);
+        startActivity(intent);
     }
 }
