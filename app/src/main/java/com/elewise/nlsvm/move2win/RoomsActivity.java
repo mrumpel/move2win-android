@@ -4,22 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.elewise.nlsvm.move2win.adapters.RoomsAdapter;
 import com.elewise.nlsvm.move2win.models.Room;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RoomsActivity extends AppCompatActivity {
 
@@ -35,7 +26,9 @@ public class RoomsActivity extends AppCompatActivity {
 
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("android");
+                .child("android")
+                .orderByChild("Status")
+                .equalTo(Room.Status.Empty.ordinal());
 
         FirebaseRecyclerOptions<Room> options = new FirebaseRecyclerOptions.Builder<Room>()
                         .setQuery(query, Room.class)
@@ -60,6 +53,6 @@ public class RoomsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        adapter.startListening();
+        adapter.stopListening();
     }
 }

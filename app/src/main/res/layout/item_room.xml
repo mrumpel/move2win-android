@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="model"
-            type="com.elewise.nlsvm.move2win.databinding.vm.RoomVM"/>
+            type="com.elewise.nlsvm.move2win.databinding.vm.RoomVM" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="#aaa"
+        android:paddingBottom="@dimen/list_item_gap"
+        android:paddingEnd="@dimen/indent_small"
+        android:paddingStart="@dimen/indent_small">
 
-        <TextView
-            android:id="@+id/room_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/indent_small"
+            android:paddingStart="@dimen/indent_small">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/room_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:paddingLeft="@dimen/indent_normal"
+                android:paddingRight="@dimen/indent_normal"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                tools:text="NHBGVJH JGHG KG j" />
 
+            <TextView
+                android:id="@+id/driver_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:paddingLeft="@dimen/indent_normal"
+                android:paddingRight="@dimen/indent_normal"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                tools:text="NHBGVJH JGHG KG j"
+
+                />
+
+        </LinearLayout>
+    </FrameLayout>
 </layout>

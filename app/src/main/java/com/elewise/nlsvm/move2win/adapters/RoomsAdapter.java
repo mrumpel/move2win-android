@@ -1,6 +1,5 @@
 package com.elewise.nlsvm.move2win.adapters;
 
-import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elewise.nlsvm.move2win.R;
-import com.elewise.nlsvm.move2win.databinding.ItemRoomBinding;
-import com.elewise.nlsvm.move2win.databinding.vm.RoomVM;
 import com.elewise.nlsvm.move2win.models.Room;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -46,17 +43,19 @@ public class RoomsAdapter extends FirebaseRecyclerAdapter<Room, RoomsAdapter.Roo
     //<editor-fold desc="View Holder">
     public static class RoomViewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView viewById;
+        private final TextView roomName;
+        private final TextView driverName;
 
         public RoomViewHolder(View itemView) {
             super(itemView);
-            viewById = itemView.findViewById(R.id.room_name);
+            roomName = itemView.findViewById(R.id.room_name);
+            driverName = itemView.findViewById(R.id.driver_name);
         }
 
         public void bind(Room room){
-            viewById.setText(room.name);
+            driverName.setText(room.driver1.name);
+            roomName.setText(room.name);
         }
-
     }
     //</editor-fold>
 }
