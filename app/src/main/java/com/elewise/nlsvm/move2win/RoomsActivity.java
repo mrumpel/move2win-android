@@ -1,9 +1,11 @@
 package com.elewise.nlsvm.move2win;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.elewise.nlsvm.move2win.adapters.RoomsAdapter;
 import com.elewise.nlsvm.move2win.models.Room;
@@ -23,6 +25,15 @@ public class RoomsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rooms);
 
         RecyclerView view = findViewById(R.id.rooms_recycler);
+
+        findViewById(R.id.fab).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(RoomsActivity.this, CreateRoomActivity.class));
+                    }
+                }
+        );
 
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
