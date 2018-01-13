@@ -25,6 +25,7 @@
             android:text="@={model.roomName}"
             android:layout_marginBottom="@dimen/indent_normal"
             android:hint="Комната"
+            android:inputType="textPersonName"
             />
 
         <EditText
@@ -33,6 +34,8 @@
             android:minLines="1"
             android:text="@={model.driverName}"
             android:hint="Водитель"
+            android:layout_marginBottom="@dimen/indent_large"
+            android:inputType="textPersonName"
             />
 
         <Button
@@ -57,7 +60,6 @@
             android:onClick="@{handler::onClickCreateFinish}"
             />
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,8 +78,6 @@
             android:textAllCaps="false"
             android:onClick="@{handler::onClickCreateRoom}"
             />
-
-
 
     </LinearLayout>
 </layout>

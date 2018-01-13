@@ -1,4 +1,4 @@
-package com.elewise.nlsvm.move2win;
+package com.elewise.nlsvm.move2win.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

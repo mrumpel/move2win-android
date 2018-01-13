@@ -1,4 +1,4 @@
-package com.elewise.nlsvm.move2win;
+package com.elewise.nlsvm.move2win.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.elewise.nlsvm.move2win.R;
 import com.elewise.nlsvm.move2win.adapters.RoomsAdapter;
 import com.elewise.nlsvm.move2win.models.Room;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

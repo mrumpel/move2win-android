@@ -28,7 +28,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_maps">
             <intent-filter>
@@ -38,11 +38,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MapsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RaceActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RoomActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".RoomsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".CreateRoomActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MapsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RaceActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RoomActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RoomsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.CreateRoomActivity" android:screenOrientation="portrait"/>
 
     </application>
 
