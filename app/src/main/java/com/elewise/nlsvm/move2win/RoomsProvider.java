@@ -5,4 +5,5 @@ package com.elewise.nlsvm.move2win;
  */
 
 public class RoomsProvider  {
+
 }
