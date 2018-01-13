@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-</LinearLayout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.elewise.nlsvm.move2win.databinding.vm.CreateRoomVM"/>
+        <variable
+            name="handler"
+            type="com.elewise.nlsvm.move2win.databinding.vm.CreateRoomHandler"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/indent_normal"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="1"
+            android:text="@={model.roomName}"
+            android:layout_marginBottom="@dimen/indent_normal"
+            android:hint="Комната"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="1"
+            android:text="@={model.driverName}"
+            android:hint="Водитель"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавить Точку Старта"
+            android:visibility="@{model.start == null ? View.VISIBLE : View.GONE}"
+            android:onClick="@{handler::onClickCreateStart}"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{model.startStr}"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавить Точку Финиша"
+            android:visibility="@{model.finish == null ? View.VISIBLE : View.GONE}"
+            android:onClick="@{handler::onClickCreateFinish}"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{model.finishStr}"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Создать"
+            android:textAllCaps="false"
+            android:onClick="@{handler::onClickCreateRoom}"
+            />
+
+
+
+    </LinearLayout>
+</layout>
